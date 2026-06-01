@@ -127,20 +127,30 @@ class enhancement_model(BaseModel):
             self.set_params_lr_zero()
 
         self.optimizer_G.zero_grad()
-        self.fake_H,self.fake_Amp,self.fake_H_s1,self.snr = self.netG(self.var_L)
+        self.fake_H,self.fake_Fourier = self.netG(self.var_L)
+
         l_pix = self.l_pix_w * self.cri_pix(self.fake_H, self.real_H)
-        #l_ssim = (1 - self.ssim_loss(self.fake_H, self.real_H)) * 0.3
-        l_final = l_pix
+        l_ssim = (1 - self.ssim_loss(self.fake_H, self.real_H))
+   
+        l_canny = self.canny_loss(self.fake_H, self.real_H) * 0.1
+		
+		l_vgg = 0.0
+        if self.opt['train']['vgg_loss']:
+            l_vgg = self.l_pix_w * self.cri_vgg(self.fake_H, self.real_H) * 0.3
+            self.log_dict['l_vgg'] = l_vgg.item()
+		
+        l_final = l_pix + l_ssim   + l_canny  + l_vgg  # +l_pha  # + l_amp + l_pix_amp # + l_pix_amp +l_pha # + l_vgg + l_amp
         l_final.backward()
         torch.nn.utils.clip_grad_norm_(self.netG.parameters(), 0.01)
         self.optimizer_G.step()
         self.log_dict['l_pix'] = l_pix.item()
-        #self.log_dict['l_ssim'] = l_ssim.item()
+        self.log_dict['l_ssim'] = l_ssim.item()
+        self.log_dict['l_canny'] = l_canny.item()
 
     def test(self):
         self.netG.eval()
         with torch.no_grad():
-            self.fake_H, _, self.fake_H_s1 ,self.snr= self.netG(self.var_L)
+            self.fake_H, self.fake_Fourier= self.netG(self.var_L)
         self.netG.train()
 
     def get_current_log(self):

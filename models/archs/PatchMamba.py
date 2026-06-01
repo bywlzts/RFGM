@@ -279,7 +279,7 @@ class PatchMamba(torch.nn.Module):
             total_blocks = num_blocks
 
         total_channels = input_channels * total_blocks
-        self.init_ccnv = nn.Conv2d(6, input_channels, 3, 1, 1, bias=True)
+        self.init_ccnv = nn.Conv2d(3, input_channels, 3, 1, 1, bias=True)
         self.conv1 = nn.Conv2d(total_channels, total_channels, (1, 1))
         self.norm1 = LayerNorm(total_channels, LayerNorm_type)
         self.conv_out = nn.Conv2d(input_channels, 3, 3, 1, 1, bias=True)
@@ -294,6 +294,7 @@ class PatchMamba(torch.nn.Module):
 
 
     def forward(self, x):
+        x_ori = x
         x = self.init_ccnv(x)
         stacked_blocks, block_info = self.block_processor.split_and_stack_blocks(x)
         processed_blocks = self.conv1(stacked_blocks)
@@ -306,6 +307,6 @@ class PatchMamba(torch.nn.Module):
             processed_blocks = processed_blocks.permute(0, 3, 1, 2)
 
         merged_image = self.block_processor.unstack_and_merge_blocks(processed_blocks, block_info)
-        merged_image = self.conv_out(merged_image)
+        merged_image = self.conv_out(merged_image) + x_ori
 
         return merged_image

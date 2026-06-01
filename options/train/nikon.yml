@@ -13,8 +13,8 @@ datasets:
     interval_list: [1]
     random_reverse: false
     border_mode: false
-    dataroot_GT: /home/zts/000_Datasets/001_LSRW-Huawei/Trainingdata/high
-    dataroot_LQ: /home/zts/000_Datasets/001_LSRW-Huawei/Trainingdata/low
+    dataroot_GT: /home/zts/000_Datasets/001_LSRW-Nikon/Trainingdata/high
+    dataroot_LQ: /home/zts/000_Datasets/001_LSRW-Nikon/Trainingdata/low
 
 
     n_workers: 3  # per GPU
@@ -26,8 +26,8 @@ datasets:
     color: RGB
   val:
     name: ll_dataset
-    dataroot_GT: /home/zts/000_Datasets/001_LSRW-Huawei/Eval/high/
-    dataroot_LQ: /home/zts/000_Datasets/001_LSRW-Huawei/Eval/low/
+    dataroot_GT: /home/zts/000_Datasets/001_LSRW-Nikon/Eval/high/
+    dataroot_LQ: /home/zts/000_Datasets/001_LSRW-Nikon/Eval/low/
 
     train_size: [600, 400]
 
