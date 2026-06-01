@@ -6,12 +6,15 @@
 - *Key Laboratory of Symbolic Computation and Knowledge Engineering of Ministry of Education*
 - *College of Communication Engineering, Jilin University*
 
+## 🔥 News
+- [12/2025] The code is released.
+- [11/2025] RFGM accepted to AAAI 2026.
+
 ## 1. Abstract
 Recovering fine-grained details in extremely dark images remains challenging due to severe structural information loss and noise corruption. Existing enhancement methods often fail to preserve intricate details and sharp edges, limiting their effectiveness in downstream applications like text and edge detection. To address these deficiencies, we propose an efficient dual-stage approach centered on detail recovery for dark images. In the first stage, we introduce a Residual Fourier-Guided Module (RFGM) that effectively restores global illumination in the frequency domain. RFGM captures inter-stage and inter-channel dependencies through residual connections, providing robust priors for high-fidelity frequency processing while mitigating error accumulation risks from unreliable priors. The second stage employs complementary Mamba modules specifically designed for textural structure refinement: (1) Patch Mamba operates on channel-concatenated non-downsampled patches, meticulously modeling pixel-level correlations to enhance fine-grained details without resolution loss. (2) Grad Mamba explicitly focuses on high-gradient regions, alleviating state decay in state space models and prioritizing reconstruction of sharp edges and boundaries. Extensive experiments on multiple benchmark datasets and downstream applications demonstrate that our method significantly improves detail recovery performance while maintaining efficiency. Crucially, the proposed modules are lightweight and can be seamlessly integrated into existing Fourier-based frameworks with minimal computational overhead.
 
 ## 2. Over-all-Architecture
-![Over-all-Architecture](<img width="1457" height="525" alt="image" src="https://github.com/user-attachments/assets/f5ccc863-6ed1-4c09-b9d4-41ebf41af52a" />
-)
+![Over-all-Architecture](https://github.com/user-attachments/assets/79cac3d3-7964-46ab-bd04-ed572b053a97)
 
 
 ## 3. Datasets
