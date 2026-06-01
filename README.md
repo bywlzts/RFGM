@@ -1,5 +1,5 @@
 
-## [AAAI 2026] Beyond Illumination: Fine-Grained Detail Preservation in Extreme Dark Image Restoration [Paper](https://arxiv.org/abs/2508.03336) 
+## [AAAI 2026] Beyond Illumination: Fine-Grained Detail Preservation in Extreme Dark Image Restoration [Paper](https://ojs.aaai.org/index.php/AAAI/article/view/38276/42238) 
 
 - *Tongshun Zhang, Pingping Liu, Zixuan Zhong, Zijian Zhang, Qiuzhan Zhou*
 - *College of Computer Science and Technology, Jilin University*
